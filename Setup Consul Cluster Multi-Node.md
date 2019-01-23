@@ -48,7 +48,8 @@ sudo mkdir /var/consul
 ```
 
 ## Step 3: Create a consul secret using the following command from one of the three servers. Copy the secret to a text file.
-consul keygen
+
+` consul keygen `
 
 ## Step 4: Create a config file on all the three servers.
 

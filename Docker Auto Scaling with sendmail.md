@@ -1,6 +1,6 @@
 # Docker Auto Scaling with sendmail
 
-##Use-case 
+## Use-case 
 
 I had a PHP application running inside my Docker container (CentOS 7 based), being served by httpd (Apache2). This was single container running on a host machine. A use-case arose when I thought of what would happen when the traffic to my website increased or the CPU utilization went high etc. . I would have to scale my containers i.e. launch a new server and run a container inside that. Also, what I needed to do is keep the containers isolated & check whether the container has come up in auto-scaling or not. So, that is what the blog is about. So, I have made a script which you can add to user data in Launch Configuration.
 Prerequisites 

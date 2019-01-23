@@ -82,10 +82,8 @@ We need to expose the alert manager using NodePort or Load Balancer just to acce
 Create a [Service.yaml](https://raw.githubusercontent.com/veeru538/learning_path/master/Alertmanager-service.yaml) file with the following contents.
 
 Create the service using kubectl.
-kubectl create -f Service.yaml
-1
-	
-kubectl create -f Service.yaml
+
+` kubectl create -f Service.yaml`
 
 Now, you will be able to access Alert Manager on Node Port 31000. For example,
 http://nodeserverIP:31000

@@ -64,7 +64,22 @@ ssh into the instance and follow the steps given below.
 
 The above script will ask for log file location other options for managing logs in cloudwatch. Hit enter when asked for access key and secret key. Since we are using IAM roles, by default, the instance has cloudwatch write permissions.
 
-Provide valid log path files and custom names fo identifying it in the cloudwatch dashboard. [The parameter reference is shown below](https://github.com/veeru538/learning_path/blob/master/image.png)
+Provide valid log path files and custom names fo identifying it in the cloudwatch dashboard. [![The parameter reference is shown below](https://github.com/veeru538/learning_path/blob/master/image.png)]
 
+Except Ubuntu 16.04 in all other Linux systems, the above script will create a service. So that you can manage the aws logs agent using the following commands.
 
+In Ubuntu 16.04, for setting up awslogs as a service, you can follow this article.
+
+```	
+sudo service awslogs start
+sudo service awslogs stop
+sudo service awslogs restart
+
+```
+
+All the aws logs config files and startup scripts can be found under `/var/awslogs ` folder.
+
+You can add additional log configs in the `/var/awslogs/etc/awslogs.conf` file. After making the changes, make sure you restart the agent.
+
+AWS specific configuration can be edited in `/var/awslogs/etc/aws.conf` file.
 

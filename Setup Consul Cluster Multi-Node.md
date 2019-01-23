@@ -45,6 +45,7 @@ sudo rm -f  consul_1.2.0_linux_amd64.zip
 sudo mkdir -p /etc/consul.d/scripts
 sudo mkdir /var/consul
 
+```
 
 ## Step 3: Create a consul secret using the following command from one of the three servers. Copy the secret to a text file.
 consul keygen

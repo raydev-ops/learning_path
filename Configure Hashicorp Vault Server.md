@@ -260,6 +260,6 @@ Step 10: Now you can also view vault console using the following URL,
 Finally, you can log in with root credentials which we created while initializing vault, in our case d4dd0b96-4767-57a3-9081-aca03e530c8f. Managing will be easy through UI
 
 Once you login you will see the following page,
-[login](https://github.com/veeru538/learning_path/blob/master/vault-1.jpg)
+[![](https://github.com/veeru538/learning_path/blob/master/vault-1.jpg)]
 
 

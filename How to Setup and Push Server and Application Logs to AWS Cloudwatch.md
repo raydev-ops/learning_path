@@ -87,3 +87,75 @@ The agent start and other scripts can be found under `/var/awslogs/bin` folder.
 
 Once the setup is done, you can view all the configured logs under cloudwatch dashboard (under logs option)
 
+
+## How To Setup AWS Logs Agent on Ubuntu 16.04 Instance
+
+This tutorial will guide you through the steps for configuring awslogs agent on an EC2 Ubuntu 16.04 server instance.
+Install and Configure AWSLogs
+
+Step1: Update the system and install python.
+
+```
+sudo apt-get update -y
+sudo apt-get install python
+```
+
+Step2: Download the latest agent installation script.
+
+```	
+curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py -O
+```
+
+Step3: Run the agent setup command with the region parameter. Replace the eu-west-2 with the aws region code where you are operating.
+
+```
+sudo python ./awslogs-agent-setup.py --region us-west-2
+```
+
+Fill in the required parameters when prompted.
+Setup AWSLogs as a service
+
+There is no support for creating awslogs as a service in Ubuntu 16.04. So we need to create our own systemd unit file for running it as a service.
+
+```
+cd /etc/systemd/system
+```
+2. Create a file named awslogs.service
+	
+` vim awslogs.service `
+
+3. Copy the following content on the awslogs.service file.
+
+```	
+[Unit]
+Description=Service for CloudWatch Logs agent
+After=rc-local.service
+ 
+[Service]
+Type=simple
+Restart=always
+KillMode=process
+TimeoutSec=infinity
+PIDFile=/var/awslogs/state/awslogs.pid
+ExecStart=/var/awslogs/bin/awslogs-agent-launcher.sh --start --background --pidfile $PIDFILE --user awslogs --chuid awslogs 
+ 
+[Install]
+WantedBy=multi-user.target
+
+```
+4. Now start the agent using the following command.
+
+`systemctl start awslogs.service `
+
+To stop and restart, you can use the following commands.
+
+```
+systemctl stop awslogs.service
+systemctl restart awslogs.service
+```
+
+5. To enable awslogs service on boot, execute the following command.
+
+```
+systemctl enable awslogs.service
+```	

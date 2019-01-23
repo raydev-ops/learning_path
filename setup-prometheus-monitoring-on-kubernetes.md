@@ -19,7 +19,7 @@ You need to assign cluster reader permission to this namespace so that Prometheu
 
 We should create a config map with all the prometheus scrape config and alerting rules, which will be mounted to the Prometheus container in /etc/prometheus as prometheus.yaml and prometheus.rules files. The prometheus.yaml contains all the configuration to dynamically discover pods and services running in the kubernetes cluster. prometheus.rules will contain all the alert rules for sending alerts to alert manager.
 
-1. Create a file called config-map.yaml and copy the contents of this file  [![config-map.yaml HERE] (https://raw.githubusercontent.com/veeru538/learning_path/master/config-map.yaml)]
+1. Create a file called config-map.yaml and copy the contents of this file  [config-map.yaml HERE (https://raw.githubusercontent.com/veeru538/learning_path/master/config-map.yaml)]
 
 
 

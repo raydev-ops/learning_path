@@ -83,3 +83,7 @@ You can add additional log configs in the `/var/awslogs/etc/awslogs.conf` file. 
 
 AWS specific configuration can be edited in `/var/awslogs/etc/aws.conf` file.
 
+The agent start and other scripts can be found under `/var/awslogs/bin` folder.
+
+Once the setup is done, you can view all the configured logs under cloudwatch dashboard (under logs option)
+

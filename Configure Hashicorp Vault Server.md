@@ -262,4 +262,26 @@ Finally, you can log in with root credentials which we created while initializin
 Once you login you will see the following page,
 [![](https://github.com/veeru538/learning_path/blob/master/vault-1.jpg)]
 
+Vault Roles and Policies
 
+Once the setup is done, you can use vault by enabling AppRoles or some other auth methods with proper policies associated with it. Covering full roles and policies is out of the scope of this article.
+
+You can create AppRole and Policies through CLI as well as vault console.
+
+```	
+vault auth enable approle
+vault write auth/approle/role/demo bound_cidr_list=10.0.0.0/16 bind_secret_id=false policies=default-policy
+```
+Note: This same can be done from Vault console also
+
+bound_cidr_list: If bound_cidr_list is set on the role, then the list of CIDR blocks listed here should be a subset of the CIDR blocks listed on the role.
+
+bind_secret_id: Require secret_id to be presented when logging in using this AppRole.
+
+Configure secrets from the console as shown in below image, by default vault uses KV secret engine, we can even use AWS, RabbitMQ, Google cloud or any databases as a secret engine.
+
+[![](https://github.com/veeru538/learning_path/blob/master/vault-2.jpg)]
+
+Vault server which we have created is a standalone instance with HA Enabled configuration, If we disable HA Enabled option from config.json this will act as a cluster without HA.
+
+To enable HA we can have multiple machines where we configure api_addr parameter as the host IP, at a time only one of the node will act as the active node and rest of them are standby nodes.

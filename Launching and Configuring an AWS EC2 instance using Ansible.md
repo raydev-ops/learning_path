@@ -146,7 +146,7 @@ The complete ansible playbook to launch instance using above tasks is as follows
 The playbook has been created. Now, for example, the playbook should be run as:
 
 
-'ansible-playbook playbook_name.yml –extra-vars volume-size=10 -e instance_type=t2.micro -e region=us=east-1 -e keypair=sample.pem -e count=1 '
+`ansible-playbook playbook_name.yml –extra-vars volume-size=10 -e instance_type=t2.micro -e region=us=east-1 -e keypair=sample.pem -e count=1 `
 
 
 

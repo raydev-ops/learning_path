@@ -21,27 +21,27 @@ In addition to being able to store secrets, Vault can be used to encrypt/decrypt
 
 #### Secure Secret Storage: 
      
-     Arbitrary key/value secrets can be stored in Vault. It encrypts the secret and stores in a persistent backend storage. 
-     Vault supports multiple storage backends such as a local disk, consul or cloud storage like AWS S3 or GCS bucket.
+Arbitrary key/value secrets can be stored in Vault. It encrypts the secret and stores in a persistent backend storage. 
+Vault supports multiple storage backends such as a local disk, consul or cloud storage like AWS S3 or GCS bucket.
 
 #### Dynamic Secrets: 
      
-     Vault can generate secrets on-demand for some systems, such as AWS or SQL databases. 
-     For example, when an application needs to access an S3 bucket, it asks Vault for credentials, and Vault will generate an AWS keypair with valid permissions on demand. 
-     After creating these dynamic secrets, Vault will also automatically revoke them after the lease is up.
+Vault can generate secrets on-demand for some systems, such as AWS or SQL databases. 
+For example, when an application needs to access an S3 bucket, it asks Vault for credentials, and Vault will generate an AWS keypair with valid permissions on demand. 
+After creating these dynamic secrets, Vault will also automatically revoke them after the lease is up.
      
 #### Data Encryption: 
      
-     Vault is capable of encrypting and decrypting data without storing it. 
-     This allows security teams to define encryption parameters and developers to store encrypted data in a location such as SQL without having to design their own encryption methods.
+Vault is capable of encrypting and decrypting data without storing it. 
+This allows security teams to define encryption parameters and developers to store encrypted data in a location such as SQL without having to design their own encryption methods.
 
 #### Leasing and Renewal: 
 
-     Secrets in vaults are associated with the lease, end of the lease vault will revoke the secrets, We can renew lease using renew APIs.
+Secrets in vaults are associated with the lease, end of the lease vault will revoke the secrets, We can renew lease using renew APIs.
 
 #### Revocation: 
     
-     Vault has built-in support for secret revocation.     
+Vault has built-in support for secret revocation.     
 
 ## Setup and configure Vault Server on Linux
 

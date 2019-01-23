@@ -8,7 +8,7 @@ First, we will create a Kubernetes namespace for all our monitoring components. 
 
 You need to assign cluster reader permission to this namespace so that Prometheus can fetch the metrics from kubernetes API’s.
 
-1. Create a file named clusterRole.yaml (https://raw.githubusercontent.com/veeru538/learning_path/master/clusterRole.yaml)
+1. Create a file named  [clusterRole.yaml](https://raw.githubusercontent.com/veeru538/learning_path/master/clusterRole.yaml)
 
 
 2. Create the role using the following command.

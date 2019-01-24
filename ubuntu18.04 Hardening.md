@@ -368,3 +368,17 @@ Now that the agent is installed, run the following command to add the server-age
 You can verify that the agent is communicating with the server by checking the ossec agent logs as shown below.
 
 `tail /var/ossec/logs/ossec.log`
+
+
+
+## Lynis is a security auditing for system
+
+Clone or download the project files (no compilation nor installation is required) ;
+
+`  git clone https://github.com/CISOfy/lynis  `
+
+Execute:
+
+` cd lynis; ./lynis audit system  `
+
+If you want to run the software as root, we suggest changing the ownership of the files. Use chown -R 0:0 to recursively alter the owner and group and set it to user ID 0 (root).

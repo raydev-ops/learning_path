@@ -288,6 +288,7 @@ cd ossec-hids-3.1.0
 ./install.sh
 ```
 The installer will first prompts you to select the installation language, English by default, 
+
       abbreviated as [en]. Press Enter to accept the default
       The next prompt asks you verify the type of installation **agent**
       Once you chose the type of installation, press enter to continue. For the next prompt, press Enter chose **/var/ossec**  as the default install location

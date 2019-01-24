@@ -104,29 +104,34 @@ sudo dpkg-statoverride --update --add root devteam 4750 /bin/su
 ` sudo sed -i /etc/hosts -e "s/^127.0.0.1 localhost$/127.0.0.1 localhost $(hostname)/"  `
 
 ### Consider running ARP monitoring software (arpwatch,arpon) 
-sudo apt-get install arpwatch  arpon -y
+
+` sudo apt-get install arpwatch  arpon -y `
 
 
 ### Purge old/removed packages (2 found) with aptitude purge or dpkg --purge command. This will cleanup old configuration files
+```
 sudo apt install aptitude -y
 sudo aptitude purge
-
+```
 
 ### check list of services enabled
+```
 sudo systemctl list-unit-files --type=service
 sudo chkconfig --list
 sudo  systemctl daemon-reload
-
-#Note: Now, you can disable a service by typing: systemctl disable <service>
+```
+Note: Now, you can disable a service by typing: systemctl disable <service>
 
 
 ## Set password rules PAM password strength tools
 The password rules config file is located at etc/pam.d/common-password. Edit that file to include, for example, the following line:
 
- sudo apt-get install libpam-cracklib 
+`  sudo apt-get install libpam-cracklib  `
  You need to edit the file /etc/pam.d/common-password, enter
- 
- password        requisite                       pam_cracklib.so retry=3 minlen=16 difok=3 ucredit=-1 lcredit=-2 dcredit=-2 ocredit=-2
+
+` sudo vi  /etc/pam.d/common-password `
+ Modify Below line 
+ `  password        requisite                       pam_cracklib.so retry=3 minlen=16 difok=3 ucredit=-1 lcredit=-2 dcredit=-2 ocredit=-2 `
 
 
     retry=3 : Prompt user at most 3 times before returning with error. The default is 1.

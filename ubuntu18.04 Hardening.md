@@ -239,6 +239,18 @@ or
 sudo sysctl -p
 ```
 
+## Set Security Limits
+You might need to protect your system against fork bomb attacks. A simple way to prevent this is by setitng up processes limit for your users. All the limits can be configured in the "/etc/security/limits.conf" file.
+
+` sudo vi /etc/security/limits.conf `
+
+This file comes with all the help you need. Here's an example:
+```
+user1 hard nproc 100
+@group1 hard nproc 20
+```
+This will prevent users from a specific group from having a maximum of 20 processs and maximize the number of processes to 100 to user1.
+
 ## Install and Configure Firewall:
 
 After setting up the SSH server a firewall should be activated to secure the system. We’ll use the uncomplicated firewall (UFW). UFW should be installed by default, if not install it now. afterwards enable the SSH port, which you’ve set in your sshd_config. In the example above this would be port 22. Afterwards you need to enable the firewall.
@@ -381,7 +393,14 @@ You can verify that the agent is communicating with the server by checking the o
 
 `tail /var/ossec/logs/ossec.log`
 
-
+## Install Antivirus (clamav)
+```
+sudo apt-get install clamav
+sudo freshclam
+sudo apt-get install clamav-daemon
+sudo crontab -e
+00 00 * * * clamscan -r / | grep FOUND >> /var/log/report/myfile.txt
+```
 
 ## Lynis is a security auditing for system
 

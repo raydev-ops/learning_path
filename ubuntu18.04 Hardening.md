@@ -103,18 +103,46 @@ sudo dpkg-statoverride --update --add root devteam 4750 /bin/su
 
 ` sudo sed -i /etc/hosts -e "s/^127.0.0.1 localhost$/127.0.0.1 localhost $(hostname)/"  `
 
-### Consider running ARP monitoring software (arpwatch,arpon) 
+## Consider running ARP monitoring software (arpwatch,arpon) 
 
 ` sudo apt-get install arpwatch  arpon -y `
 
+## Run pwck manually and correct any errors in the password file 
+```
+sudo apt-get install pwck -y 
+sudo apt-get  install  passwordsafe -y
+```
 
-### Purge old/removed packages (2 found) with aptitude purge or dpkg --purge command. This will cleanup old configuration files
+## Install a PAM module for password strength testing like pam_cracklib or pam_passwdqc   PAM password strength tools 
+` sudo apt-get install PAM `
+
+## Install package apt-show-versions for patch management purposes
+` sudo apt-get install apt-show-versions -y  `
+
+## Install a package audit tool to determine vulnerable packages Enable auditd to check for read/write events
+
+```
+sudo apt-get install auditd -y
+sudo systemctl restart auditd
+```
+If someone is modifying your passwords file — or using a compromised user account to do that 
+you want to identify the breach so you can stop it at the source. 
+By watching files with an audit tool, you can easily do that.
+
+` sudo auditctl -w /etc/passwd -p war -k password-file `
+
+## Install debsums utility for the verification of packages with known good database
+
+`sudo apt-get install debsums -y `
+
+
+## Purge old/removed packages (2 found) with aptitude purge or dpkg --purge command. This will cleanup old configuration files
 ```
 sudo apt install aptitude -y
 sudo aptitude purge
 ```
 
-### check list of services enabled
+## check list of services enabled
 ```
 sudo systemctl list-unit-files --type=service
 sudo chkconfig --list

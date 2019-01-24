@@ -98,6 +98,11 @@ sudo groupadd devteam
 sudo usermod -a -G devteam  dennis
 sudo dpkg-statoverride --update --add root devteam 4750 /bin/su
 ```
+
+# Set hostname in hosts file
+
+` sudo sed -i /etc/hosts -e "s/^127.0.0.1 localhost$/127.0.0.1 localhost $(hostname)/"  `
+
 ## Disable IRQ Balance
 
 You should turn off IRQ Balance to make sure you do not get hardware interrupts in your threads. Turning off IRQ Balance, will optimize the balance between power savings and performance through distribution of hardware interrupts across multiple processors.

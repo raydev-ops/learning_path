@@ -49,6 +49,13 @@ To get notification by email, update the following line with your email address:
 
 ```
 
+## OpenSSL  Update for preventing attacks
+```
+sudo apt-get update
+sudo apt-get upgrade openssl libssl-dev
+```
+
+
 ## Language / Region settings
 
 I sometimes have problems with language and region settings after installation. To fix this, I set the locales to **en_US.UTF-8**.

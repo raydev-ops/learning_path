@@ -205,6 +205,14 @@ vm.panic_on_oom = 1
 kernel.panic = 10
 ```
 
+apply the settings:
+
+```
+sudo sysctl --system
+or 
+sudo sysctl -p
+```
+
 
 ## Install and Configuring fail2ban
 

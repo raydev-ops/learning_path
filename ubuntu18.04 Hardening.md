@@ -99,9 +99,78 @@ sudo usermod -a -G devteam  dennis
 sudo dpkg-statoverride --update --add root devteam 4750 /bin/su
 ```
 
-# Set hostname in hosts file
+## Set hostname in hosts file
 
 ` sudo sed -i /etc/hosts -e "s/^127.0.0.1 localhost$/127.0.0.1 localhost $(hostname)/"  `
+
+### Consider running ARP monitoring software (arpwatch,arpon) 
+sudo apt-get install arpwatch  arpon -y
+
+
+### Purge old/removed packages (2 found) with aptitude purge or dpkg --purge command. This will cleanup old configuration files
+sudo apt install aptitude -y
+sudo aptitude purge
+
+
+### check list of services enabled
+sudo systemctl list-unit-files --type=service
+sudo chkconfig --list
+sudo  systemctl daemon-reload
+
+#Note: Now, you can disable a service by typing: systemctl disable <service>
+
+
+## Set password rules PAM password strength tools
+The password rules config file is located at etc/pam.d/common-password. Edit that file to include, for example, the following line:
+
+ sudo apt-get install libpam-cracklib 
+ You need to edit the file /etc/pam.d/common-password, enter
+ 
+ password        requisite                       pam_cracklib.so retry=3 minlen=16 difok=3 ucredit=-1 lcredit=-2 dcredit=-2 ocredit=-2
+
+
+    retry=3 : Prompt user at most 3 times before returning with error. The default is 1.
+    minlen=16 : The minimum acceptable size for the new password.
+    difok=3 : This argument will change the default of 5 for the number of character changes in the new password that differentiate it from the old password.
+    ucredit=-1 : The new password must contain at least 1 uppercase characters.
+    lcredit=-2 : The new password must contain at least 2 lowercase characters.
+    dcredit=-2 : The new password must contain at least 2 digits.
+    ocredit=-2 : The new password must contain at least 2 symbols.
+	
+## Set password expiration in login.defs
+The login.defs file — /etc/login.defs — is where a big chunk of the password configuration rules live.
+ Open it in a text editor, and look for the password aging control line. You’ll see three parameters:	
+` sudo vi /etc/login.defs ` 
+change below lines 
+
+```
+PASS_MAX_DAYS: 10
+PASS_MIN_DAYS: 0
+PASS_WARN_AGE: 7
+```
+
+    PASS_MAX_DAYS: Maximum number of days a password may be used. If the password is older than this, a password change will be forced.
+    PASS_MIN_DAYS: Minimum number of days allowed between password changes. Any password changes attempted sooner than this will be rejected
+    PASS_WARN_AGE: Number of days warning given before a password expires. A zero means warning is given only upon the day of expiration, a negative value means no warning is given. If not specified, no warning will be provided.
+ 
+ 
+## Disable USB devices (for headless servers) 
+You want to avoid someone wandering up to your server and loading malicious files or transferring data, especially if you don’t actually use the USB ports on your server. To do this, open up /etc/modprobe.d/block_usb.conf and add the following line:
+
+` sudo vi /etc/modprobe.d/block_usb.conf `
+
+add below line 
+
+` install usb-storage /bin/true  `
+
+### in some case it is use full but aws already disabled USBgaurd
+```
+sudo usbguard generate-policy > rules.conf
+vi rules.conf
+(review/modify the rule set)
+sudo install -m 0600 -o root -g root rules.conf /etc/usbguard/rules.conf
+sudo systemctl restart usbguard
+````
 
 ## Disable IRQ Balance
 

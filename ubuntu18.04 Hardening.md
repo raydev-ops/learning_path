@@ -241,6 +241,65 @@ in case if are able to login using jump server white list that jump server  like
 ` sudo ufw allow from 10.0.22.10/24  to any port 22 `
 
 
+## SSH server configuration
+
+The OpenSSH configuration is located at /etc/ssh/sshd_config.
+
+` sudo vim /etc/ssh/sshd_config `
+
+Modify Below perameters
+```
+Port 1234 # Security by obscurity doesn't work, but it leads to smaller fail2ban logs etc.
+AllowUsers dennis
+
+Protocol 2
+
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+
+# Logging
+SyslogFacility AUTH
+LogLevel INFO
+
+# Authentication:
+LoginGraceTime 120
+PermitRootLogin no
+UsePrivilegeSeparation yes
+StrictModes yes
+MaxAuthTries 3
+MaxSessions 10
+
+PubkeyAuthentication yes
+RSAAuthentication yes
+AuthorizedKeysFile %h/.ssh/authorized_keys
+
+IgnoreRhosts yes
+RhostsRSAAuthentication no
+HostbasedAuthentication no
+
+PasswordAuthentication no
+PermitEmptyPasswords no
+
+ChallengeResponseAuthentication no
+
+UsePAM yes
+
+# Additional settings
+X11Forwarding no
+PrintMotd no
+Banner none
+DebianBanner no
+
+AcceptEnv LANG LC_*
+
+Subsystem       sftp    /usr/lib/openssh/sftp-server
+
+```
+
+Restart ssh server 
+
+` sudo systemctl restart sshd `
+
 
 ## Install and Configuring fail2ban
 

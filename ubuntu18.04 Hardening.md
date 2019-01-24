@@ -88,6 +88,124 @@ sudo vi /etc/default/irqbalance
 ENABLED=0 
 ```
 
+
+## IP hardening *Sysctl Conf*
+
+**/etc/sysctl.conf** file is used to configure kernel parameters at runtime. Linux reads and applies settings from this file.
+
+These settings can:
+
+    Limit network-transmitted configuration for IPv4
+    Limit network-transmitted configuration for IPv6
+    Turn on execshield protection
+    Prevent against the common 'syn flood attack'
+    Turn on source IP address verification
+    Prevents a cracker from using a spoofing attack against the IP address of the server.
+    Logs several types of suspicious packets, such as spoofed packets, source-routed packets, and redirects.
+
+You can configure various Linux networking and system settings such as Find and edit each settings:
+
+```bash
+sudo vi /etc/sysctl.conf
+
+
+# Controls IP packet forwarding
+net.ipv4.ip_forward = 0
+
+# Ignore ICMP redirects
+net.ipv4.conf.all.accept_redirects = 0
+net.ipv6.conf.all.accept_redirects = 0
+net.ipv4.conf.default.accept_redirects = 0
+net.ipv6.conf.default.accept_redirects = 0
+
+# Disable send IPv4 redirect packets
+net.ipv4.conf.all.send_redirects = 0
+net.ipv4.conf.default.send_redirects = 0
+
+# Set Reverse Path Forwarding to strict mode as defined in RFC 3704
+net.ipv4.conf.all.rp_filter = 1
+net.ipv4.conf.default.rp_filter = 1
+
+
+# Disable source packet routing
+net.ipv4.conf.all.accept_source_route = 0
+net.ipv6.conf.all.accept_source_route = 0
+net.ipv4.conf.default.accept_source_route = 0
+net.ipv6.conf.default.accept_source_route = 0
+
+
+# Log suspicious martian packets
+net.ipv4.conf.all.log_martians = 1
+net.ipv4.conf.default.log_martians=1
+net.ipv4.icmp_ignore_bogus_error_responses = 1
+
+# Block SYN attacks
+net.ipv4.tcp_syncookies = 1
+net.ipv4.tcp_max_syn_backlog = 2048
+net.ipv4.tcp_synack_retries = 2
+net.ipv4.tcp_syn_retries = 5
+
+# Log Martians
+net.ipv4.icmp_ignore_bogus_error_responses = 1
+
+# Ignore ICMP broadcast requests
+net.ipv4.icmp_echo_ignore_broadcasts = 1
+
+# Ignore Directed pings
+net.ipv4.icmp_echo_ignore_all = 1
+kernel.exec-shield = 1
+kernel.randomize_va_space = 1
+
+# disable IPv6 if required (IPv6 might caus issues with the Internet connection being slow)
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+
+# Accept Redirects? No, this is not router
+net.ipv4.conf.all.secure_redirects = 0
+
+# Log packets with impossible addresses to kernel log? yes
+net.ipv4.conf.default.secure_redirects = 0
+
+# [IPv6] Number of Router Solicitations to send until assuming no routers are present.
+# This is host and not router.
+net.ipv6.conf.default.router_solicitations = 0
+
+# Accept Router Preference in RA?
+net.ipv6.conf.default.accept_ra_rtr_pref = 0
+
+# Learn prefix information in router advertisement.
+net.ipv6.conf.default.accept_ra_pinfo = 0
+
+# Setting controls whether the system will accept Hop Limit settings from a router advertisement.
+net.ipv6.conf.default.accept_ra_defrtr = 0
+
+# Router advertisements can cause the system to assign a global unicast address to an interface.
+net.ipv6.conf.default.autoconf = 0
+
+# How many neighbor solicitations to send out per address?
+net.ipv6.conf.default.dad_transmits = 0
+
+# How many global unicast IPv6 addresses can be assigned to each interface?
+net.ipv6.conf.default.max_addresses = 1
+
+
+# Disable IPv6 auto config
+net.ipv6.conf.default.accept_ra=0
+net.ipv6.conf.default.autoconf=0
+net.ipv6.conf.all.accept_ra=0
+net.ipv6.conf.all.autoconf=0
+net.ipv6.conf.eth0.accept_ra=0
+net.ipv6.conf.eth0.autoconf=0
+
+# In rare occasions, it may be beneficial to reboot your server reboot if it runs out of memory.
+# This simple solution can avoid you hours of down time. The vm.panic_on_oom=1 line enables panic
+# on OOM; the kernel.panic=10 line tells the kernel to reboot ten seconds after panicking.
+vm.panic_on_oom = 1
+kernel.panic = 10
+```
+
+
 ## Install and Configuring fail2ban
 
 Fail2ban is an intrusion prevention system that basically monitors log files and searches for certain patterns corresponding to a failed login. If a certain number of failed login attempts are detected from an IP address within a certain time, fail2ban blocks access for this IP address by creating a corresponding firewall rule. First of all install fail2ban:

@@ -224,6 +224,18 @@ net.ipv6.conf.all.autoconf=0
 net.ipv6.conf.eth0.accept_ra=0
 net.ipv6.conf.eth0.autoconf=0
 
+
+net.ipv6.conf.default.accept_ra_pinfo = 0
+fs.suid_dumpable = 0
+kernel.core_uses_pid = 1
+kernel.dmesg_restrict = 1
+kernel.kptr_restrict = 2
+kernel.randomize_va_space = 2
+kernel.sysrq = 0
+net.ipv4.conf.all.log_martians = 1
+net.ipv4.conf.default.log_martians = 1
+
+
 # In rare occasions, it may be beneficial to reboot your server reboot if it runs out of memory.
 # This simple solution can avoid you hours of down time. The vm.panic_on_oom=1 line enables panic
 # on OOM; the kernel.panic=10 line tells the kernel to reboot ten seconds after panicking.

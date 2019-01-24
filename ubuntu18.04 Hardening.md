@@ -76,7 +76,21 @@ Note: If for some valid reason you need to re-enable the account, simply use the
 
 ` sudo passwd -u root `
 
+## Create superadmin user
+```
+adduser samsuperadmin
+usermod -aG sudo samsuperadmin
+```
 
+## Restrict su in  specific group
+
+To allow only users in a given admin group to switch users - **su -**  execute the following steps in which you create a admin group, add a user dennis to this group and restrict the access to /bin/su to the admin group.
+
+```
+sudo groupadd devteam
+sudo usermod -a -G devteam  dennis
+sudo dpkg-statoverride --update --add root devteam 4750 /bin/su
+```
 ## Disable IRQ Balance
 
 You should turn off IRQ Balance to make sure you do not get hardware interrupts in your threads. Turning off IRQ Balance, will optimize the balance between power savings and performance through distribution of hardware interrupts across multiple processors.
@@ -213,6 +227,20 @@ or
 sudo sysctl -p
 ```
 
+## Install and Configure Firewall:
+
+After setting up the SSH server a firewall should be activated to secure the system. We’ll use the uncomplicated firewall (UFW). UFW should be installed by default, if not install it now. afterwards enable the SSH port, which you’ve set in your sshd_config. In the example above this would be port 22. Afterwards you need to enable the firewall.
+
+```
+sudo apt install ufw
+sudo ufw allow 22/tcp
+sudo ufw enable
+```
+in case if are able to login using jump server white list that jump server  like below in this example my jumpserver ip is 
+
+` sudo ufw allow from 10.0.22.10/24  to any port 22 `
+
+
 
 ## Install and Configuring fail2ban
 
@@ -245,3 +273,37 @@ sudo fail2ban-client status
 sudo fail2ban-client status sshd
 ```
 
+
+## Install and configure *OSSEC* host-based intrusion detection system
+install required packages
+
+```
+sudo apt-get update 
+sudo apt-get install build-essential -y
+sudo apt-get install gcc -y 
+wget https://github.com/ossec/ossec-hids/archive/3.1.0.tar.gz -P /tmp
+cd /tmp
+tar xzf 3.1.0.tar.gz 
+cd ossec-hids-3.1.0
+./install.sh
+```
+The installer will first prompts you to select the installation language, English by default,  abbreviated as [en]. Press Enter to accept the default
+The next prompt asks you verify the type of installation **agent**
+Once you chose the type of installation, press enter to continue. For the next prompt, press Enter chose **/var/ossec**  as the default install location
+Next, enter the IP address of the Sensor on which the agent should forward the logs for analysis. In this case, it can be you OSSEC server
+Enable system integrity check.
+Enable rootkit detection Engine
+Disable Active response by typing n unless you have a good understanding of the alerts you can see in your server.
+Press Enter to finalize the installation. If the installation is successful
+
+Connect the Agent to the Server
+
+Now that the agent is installed, run the following command to add the server-agent connection key. You can extract the Key for the specific host from the server. Enter option **I**, paste the key and confirm adding the key. Then type **Q** and press enter to exit.
+```
+/var/ossec/bin/manage_agents
+
+/var/ossec/bin/ossec-control start
+```
+You can verify that the agent is communicating with the server by checking the ossec agent logs as shown below.
+
+`tail /var/ossec/logs/ossec.log`

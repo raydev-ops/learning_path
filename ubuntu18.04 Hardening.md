@@ -287,16 +287,17 @@ tar xzf 3.1.0.tar.gz
 cd ossec-hids-3.1.0
 ./install.sh
 ```
-The installer will first prompts you to select the installation language, English by default,  abbreviated as [en]. Press Enter to accept the default
-The next prompt asks you verify the type of installation **agent**
-Once you chose the type of installation, press enter to continue. For the next prompt, press Enter chose **/var/ossec**  as the default install location
-Next, enter the IP address of the Sensor on which the agent should forward the logs for analysis. In this case, it can be you OSSEC server
-Enable system integrity check.
-Enable rootkit detection Engine
-Disable Active response by typing n unless you have a good understanding of the alerts you can see in your server.
-Press Enter to finalize the installation. If the installation is successful
+The installer will first prompts you to select the installation language, English by default, 
+   abbreviated as [en]. Press Enter to accept the default
+   The next prompt asks you verify the type of installation **agent**
+   Once you chose the type of installation, press enter to continue. For the next prompt, press Enter chose **/var/ossec**  as the default install location
+   Next, enter the IP address of the Sensor on which the agent should forward the logs for analysis. In this case, it can be you OSSEC server
+   Enable system integrity check.
+   Enable rootkit detection Engine
+   Disable Active response by typing n unless you have a good understanding of the alerts you can see in your server.
+   Press Enter to finalize the installation. If the installation is successful
 
-Connect the Agent to the Server
+**Connect the Agent to the Server**
 
 Now that the agent is installed, run the following command to add the server-agent connection key. You can extract the Key for the specific host from the server. Enter option **I**, paste the key and confirm adding the key. Then type **Q** and press enter to exit.
 ```

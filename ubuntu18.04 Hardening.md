@@ -77,6 +77,16 @@ Note: If for some valid reason you need to re-enable the account, simply use the
 ` sudo passwd -u root `
 
 
+## Disable IRQ Balance
+
+You should turn off IRQ Balance to make sure you do not get hardware interrupts in your threads. Turning off IRQ Balance, will optimize the balance between power savings and performance through distribution of hardware interrupts across multiple processors.
+
+To disable IRQ Balance, edit **/etc/default/irqbalance**  And Change the **ENABLED** value to 0::
+
+```bash
+sudo vi /etc/default/irqbalance  
+ENABLED=0 
+```
 
 ## Install and Configuring fail2ban
 

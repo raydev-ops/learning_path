@@ -1,4 +1,4 @@
-vi /etc/rc.local
+#vi /etc/rc.local
 
 #!/bin/bash
 #

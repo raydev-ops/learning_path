@@ -120,9 +120,71 @@ Bootstrap and Start the Cluster
 ## Step 8: Check the cluster status by executing the following command.
 /usr/local/bin/consul members
 
+## Step9: If you want to join other nodes
+consul join <Node 2> <Node 3>
 
 Access Consul UI:
 
 You can access the consul web UI using the following URL syntax.
 
 ` http://<consul-IP>:8500/ui `
+
+
+## Consul Template
+
+Download and install **consul-template**
+```
+cd /tmp
+wget https://releases.hashicorp.com/consul-template/0.12.0/consul-template_0.12.0_linux_amd64.zip
+unzip consul-template_0.12.0_linux_amd64.zip
+sudo chmod a+x consul-template
+sudo mv consul-template /usr/bin/consul-template
+```
+
+Make sample nginx dynamic template configuration file like below 
+
+` vim /home/ec2-user/nginx.conf.ctmpl`
+
+Mdd the below sample conetent
+
+```
+{{range services}} {{$name := .Name}} {{$service := service .Name}}
+
+upstream {{$name}} {
+   zone upstream-{{$name}} 64k;
+   {{range $service}}server {{.Address}}:{{.Port}} max_fails = 3 fail_timeout = 60
+   weight = 1;
+   {{else}}server 127.0.0.1:65535; # force a 502{{end}}
+} {{end}}
+
+server {
+   listen 80 default_server;
+   location / {
+      root /usr/share/nginx/html/;
+      index index.html;
+   }
+   location /stub_status {
+      stub_status;
+   }
+   {{range services}} {{$name := .Name}}
+   location /{{$name}} {
+      proxy_pass http://{{$name}};
+   }
+   {{end}}
+}
+
+```
+
+Run Consul-Template:
+
+```
+sudo consul-template -consul-addr 18.205.117.68:8500  -template   "/home/ec2-user/nginx.conf.ctmpl:/etc/nginx/conf.d/default.conf"  -retry 30s
+```
+verify nginx config file
+` cat /etc/nginx/conf.d/default.conf `
+
+check dynamic loading working or not 
+```
+sudo truncate  -s 0 /etc/ngin/conf.d/default.conf
+cat /etc/nginx/conf.d/default.conf
+```

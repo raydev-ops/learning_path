@@ -103,6 +103,41 @@ sudo dpkg-statoverride --update --add root devteam 4750 /bin/su
 
 ` sudo sed -i /etc/hosts -e "s/^127.0.0.1 localhost$/127.0.0.1 localhost $(hostname)/"  `
 
+
+
+## Secure /tmp and /var/tmp
+Temporary storage directories such as /tmp, /var/tmp and /dev/shm gives the ability to hackers to provide storage space for malicious executables.
+
+```
+# Let's create a 1GB (or what is best for you) filesystem file for the /tmp parition.
+sudo fallocate -l 1G /tmpdisk
+sudo mkfs.ext4 /tmpdisk
+sudo chmod 0600 /tmpdisk
+
+# Mount the new /tmp partition and set the right permissions.
+sudo mount -o loop,noexec,nosuid,rw /tmpdisk /tmp
+sudo chmod 1777 /tmp
+
+# Set the /tmp in the fstab.
+sudo nano /etc/fstab
+: /tmpdisk	/tmp	ext4	loop,nosuid,noexec,rw	0 0
+sudo mount -o remount /tmp
+
+# Secure /var/tmp.
+sudo mv /var/tmp /var/tmpold
+sudo ln -s /tmp /var/tmp
+sudo cp -prf /var/tmpold/* /tmp/
+sudo rm -rf /var/tmpold/
+
+```
+
+## Secure Shared Memory
+Shared memory can be used in an attack against a running service, apache2 or httpd for example.
+```
+sudo nano /etc/fstab
+tmpfs	/run/shm	tmpfs	ro,noexec,nosuid	0 0
+```
+
 ## Consider running ARP monitoring software (arpwatch,arpon) 
 
 ` sudo apt-get install arpwatch  arpon -y `

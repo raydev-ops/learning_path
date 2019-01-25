@@ -180,6 +180,12 @@ Run Consul-Template:
 ```
 sudo consul-template -consul-addr 18.205.117.68:8500  -template   "/home/ec2-user/nginx.conf.ctmpl:/etc/nginx/conf.d/default.conf"  -retry 30s
 ```
+
+with variables:
+```
+sudo consul-template -consul-addr 18.205.117.68:8500  -template      -template "$PATH_TO_YOUR_TEMPLATE:$PATH_TO_CONFIG_FILE" 
+    -retry 30s
+```
 verify nginx config file
 ` cat /etc/nginx/conf.d/default.conf `
 

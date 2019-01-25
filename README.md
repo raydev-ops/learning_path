@@ -1,4 +1,4 @@
-# Learning path
+# Learning
 
 
 [**Home**](index.md)  

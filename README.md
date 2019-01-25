@@ -12,4 +12,11 @@
     -  [Setup Consul Cluster Multi-Node and Load Dynamic Configuration From Template](https://github.com/veeru538/learning_path/blob/master/Setup%20Consul%20Cluster%20Multi-Node.md)
 
  - Vault
-     -  [Configure Hashicorp Vault Server.md](https://github.com/veeru538/learning_path/blob/master/Configure%20Hashicorp%20Vault%20Server.md)
+     -  [Configure Hashicorp Vault Server](https://github.com/veeru538/learning_path/blob/master/Configure%20Hashicorp%20Vault%20Server.md)
+
+ - Vault
+     -  [Configure Wave Network](https://github.com/veeru538/learning_path/blob/master/Wave.md)
+
+
+ - AWS
+     -  [Automate EBS snapshot Creation and Deletion Using Lambda](https://github.com/veeru538/learning_path/blob/master/Automate%20EBS%20snapshot%20Creation%20and%20Deletion%20Using%20Lambda.md)

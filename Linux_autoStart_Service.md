@@ -19,6 +19,7 @@ fi
 You can place it in crontab and have it executed automatically
 eg. to check every minute, insert into cron
 
-
+```
 crontab -e 
 * * * * * /path/to/script
+```

@@ -8,6 +8,27 @@ In My hosting Scnenario I launch 3 ec2 instances  1 Elastic IP
     Instance3:  i-07b8844fcad523701 (HA2-Backup)  172.31.50.239
 
     ElasticIp: 35.174.24.241
+    
+Create iam Role  according any name "eip-high-availability-keepalived-proxy"
+create and assign below policy to eip-high-availability-keepalived-proxy role  attach "eip-high-availability-keepalived-proxy" role to instance 2 and 3 
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DisassociateAddress",
+                "ec2:DescribeInstances",
+                "ec2:DescribeAddresses",
+                "ec2:AssociateAddress"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
 
 To install apache server Instance1:
   

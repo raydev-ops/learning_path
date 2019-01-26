@@ -119,12 +119,14 @@ vrrp_instance VI_1 {
 Create a script notify_master "/etc/keepalived/master.sh"
 ```
 vi /etc/keepalived/master.sh
-#!/bin/bash
-EIP=35.174.24.241
-INSTANCE_ID=i-0acb4718f932f0902
 
-/usr/local/bin/aws ec2 disassociate-address --public-ip $EIP
-/usr/local/bin/aws ec2 associate-address --public-ip $EIP --instance-id $INSTANCE_ID
+#!/bin/bash
+#EIP=35.174.24.241
+INSTANCE_ID=i-0acb4718f932f0902
+ALLOCATION_ID=eipalloc-063d7ccc791de41e5
+aws configure set default.region us-east-1
+aws ec2 disassociate-address --allocation-id  $ALLOCATION_ID
+aws ec2 associate-address --instance-id $INSTANCE_ID  --allocation-id  $ALLOCATION_ID
 ```
 
 
@@ -158,11 +160,13 @@ create a script notify_master "/etc/keepalived/master.sh"
 vi /etc/keepalived/master.sh
 
 #!/bin/bash
-EIP=35.174.24.241
+#EIP=35.174.24.241
 INSTANCE_ID=i-07b8844fcad523701
+ALLOCATION_ID=eipalloc-063d7ccc791de41e5
+aws configure set default.region us-east-1
+aws ec2 disassociate-address --allocation-id  $ALLOCATION_ID
+aws ec2 associate-address --instance-id $INSTANCE_ID  --allocation-id  $ALLOCATION_ID
 
-/usr/local/bin/aws ec2 disassociate-address --public-ip $EIP
-/usr/local/bin/aws ec2 associate-address --public-ip $EIP --instance-id $INSTANCE_ID
 ```
 ## Attach Elastic Ip instance2(Master) 
 

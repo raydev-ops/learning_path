@@ -53,6 +53,8 @@ We'll need to add two additional optimizer plugins as well. Thumbor already incl
 
 For pngcrush, run the command:
 
+[pngcrush.py](https://raw.githubusercontent.com/veeru538/learning_path/master/thumbor/pngcrush.py)
+
 ```
 nano /usr/lib64/python2.7/site-packages/thumbor/optimizers/pngcrush.py
 #--------------------------------------------------------------------------------------------------------------
@@ -99,6 +101,7 @@ class Optimizer(BaseOptimizer):
 ```
 
 For gifsicle, run the command:
+[gifsicle.py](https://raw.githubusercontent.com/veeru538/learning_path/master/thumbor/gifsicle.py)
 
 ```
 nano /usr/lib64/python2.7/site-packages/thumbor/optimizers/gifsicle.py
@@ -134,6 +137,7 @@ class Optimizer(BaseOptimizer):
 ```
 
 Install and configure Supervisord:
+[supervisord](https://raw.githubusercontent.com/veeru538/learning_path/master/thumbor/supervisord)
 
 ```
 sudo easy_install supervisor
@@ -190,7 +194,7 @@ sudo chmod +x /etc/init.d/supervisord
 sudo chkconfig --add supervisord
 ```
 
-add th below content  supervisord config file **/etc/supervisord.conf**
+add th below content  supervisord config file [**/etc/supervisord.conf**](https://raw.githubusercontent.com/veeru538/learning_path/master/thumbor/supervisord.conf)
 
 ```
 sudo vi /etc/supervisord.conf
@@ -243,10 +247,10 @@ start supervisord service
 
 ` sudo /etc/init.d/supervisord start `
 
-Configure nginx Proxy config for backend thumbor  access
+Configure nginx Proxy config for backend thumbor  access  [thumbor.conf](https://raw.githubusercontent.com/veeru538/learning_path/master/thumbor/thumbor.conf)
 
 ```
-sudo vi /etc/nginx/conf.d/thumbor.conf
+sudo vi /etc/nginx/conf.d/nginx-thumbor.conf
 
 #--------------------------------------------------------------------------------------------------------------
 # A virtual host using mix of IP-, name-, and port-based configuration

@@ -20,3 +20,7 @@
 
  - AWS
      -  [Automate EBS snapshot Creation and Deletion Using Lambda](https://github.com/veeru538/learning_path/blob/master/Automate%20EBS%20snapshot%20Creation%20and%20Deletion%20Using%20Lambda.md)
+     -  [Haproxy_keepalived_AWS_EIP](https://github.com/veeru538/learning_path/blob/master/Haproxy_keepalived_AWS_EIP.md)     
+     
+
+

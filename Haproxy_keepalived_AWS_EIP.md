@@ -22,11 +22,11 @@ Install both  keepalived and haproxy  both Instances 2 and 3:
 
 On Ubuntu systems:
 
-    ` sudo apt-get install keepalived wget haproxy  -y `
+     sudo apt-get install keepalived wget haproxy  -y 
 
 On CentOS systems:
 
-    ` sudo yum install keepalived wget haproxy  -y `
+     sudo yum install keepalived wget haproxy  -y 
 
 update haproxy config file like below: 
 

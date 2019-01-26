@@ -3,11 +3,11 @@
 
 In My hosting Scnenario I launch 3 ec2 instances  1 Elastic IP
 
-Instance1:  i-019fcc345845ce55c (WEB)         172.31.54.168
-Instance2:  i-0acb4718f932f0902 (HA1-Master)  172.31.58.51
-Instance3:  i-07b8844fcad523701 (HA2-Backup)  172.31.50.239
+    Instance1:  i-019fcc345845ce55c (WEB)         172.31.54.168
+    Instance2:  i-0acb4718f932f0902 (HA1-Master)  172.31.58.51
+    Instance3:  i-07b8844fcad523701 (HA2-Backup)  172.31.50.239
 
-ElasticIp: 35.174.24.241
+    ElasticIp: 35.174.24.241
 
 To install apache server Instance1:
   
